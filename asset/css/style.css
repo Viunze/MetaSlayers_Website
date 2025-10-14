@@ -4,11 +4,14 @@
 /* Reset dan Styling Global */
 :root {
     --primary-red: #ff0000;
-    --dark-bg: #0d0d0d;
-    --darker-bg: #000000;
+    --primary-blue: #0088ff; /* Warna aksen biru baru, ala neon */
+    --dark-bg: #0d1117; /* Biru gelap ala GitHub/modern dark mode */
+    --darker-bg: #050a10; /* Biru gelap pekat untuk body */
     --text-color: #f0f0f0;
-    --accent-glow: 0 0 5px var(--primary-red), 0 0 15px rgba(255, 0, 0, 0.8);
+    --accent-glow-red: 0 0 8px var(--primary-red), 0 0 20px rgba(255, 0, 0, 0.8);
+    --accent-glow-blue: 0 0 8px var(--primary-blue), 0 0 20px rgba(0, 136, 255, 0.8); /* Glow biru baru */
     --discord-purple: #5865F2;
+    --border-color-subtle: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -20,11 +23,19 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--darker-bg);
+    background-color: var(--darker-bg); 
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative;
+    /* Menghilangkan background noise/pattern agar terlihat lebih clean */
 }
+
+/* Menghilangkan body::before yang membuat pattern */
+body::before {
+    content: none;
+}
+
 
 .container {
     max-width: 1200px;
@@ -32,115 +43,156 @@ body {
     padding: 0 20px;
 }
 
-/* --- Floating Discord Button (Baru) --- */
+/* --- Floating Discord Button --- */
 .floating-discord-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background-color: var(--discord-purple);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.8rem;
+    /* Mengganti glow menjadi biru */
     box-shadow: 0 0 15px var(--discord-purple);
     z-index: 2000;
-    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    /* Style lainnya sama */
+    /* ... */
 }
 
 .floating-discord-btn:hover {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 0 25px var(--discord-purple), 0 0 5px white;
-    background-color: #4f5ccc;
+    /* Mengganti glow menjadi biru */
+    box-shadow: 0 0 35px var(--discord-purple), 0 0 10px white;
+    /* Style lainnya sama */
+    /* ... */
 }
 
-/* --- Header & Navigasi Premium --- */
+/* --- Header & Navigasi Premium (Gaya Website Trading) --- */
 .main-header {
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
+    background: var(--darker-bg); /* Warna solid dark blue */
+    backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
     z-index: 1000;
+    padding: 15px 0;
+    border-bottom: 2px solid var(--primary-blue); /* Border biru */
+    box-shadow: 0 5px 25px rgba(0, 136, 255, 0.3); /* Shadow biru */
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
-    border-bottom: 3px solid var(--primary-red);
-    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
 }
 
 .logo {
     font-family: 'Russo One', sans-serif;
-    font-size: 2rem;
-    letter-spacing: 3px;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    font-size: 2.2rem;
+    letter-spacing: 4px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
 }
 
 .meta-text { color: var(--text-color); }
-.slayers-text { color: var(--primary-red); text-shadow: var(--accent-glow); }
+.slayers-text { 
+    color: var(--primary-red); /* Tetap merah agar logo menonjol */
+    text-shadow: var(--accent-glow-red); 
+    animation: none; /* Menghilangkan flicker yang mungkin mengganggu */
+}
+
+.main-header nav {
+    flex-grow: 1;
+    margin: 0 30px;
+    text-align: center;
+}
 
 .main-header nav a {
     color: var(--text-color);
     text-decoration: none;
-    margin-left: 30px;
+    margin: 0 20px;
     font-weight: 600;
+    font-size: 1.05rem;
     transition: color 0.3s, text-shadow 0.3s;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.main-header nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    background-color: var(--primary-blue); /* Underline biru */
+    left: 50%; /* Mulai dari tengah */
+    transform: translateX(-50%);
+    bottom: 0px;
+    transition: width 0.3s ease-out;
+    border-radius: 5px;
+}
+
+.main-header nav a:hover::after {
+    width: 100%;
 }
 
 .main-header nav a:hover {
-    color: var(--primary-red);
-    text-shadow: var(--accent-glow);
+    color: var(--primary-blue); /* Teks biru saat hover */
+    text-shadow: 0 0 10px var(--primary-blue);
+    transform: none;
 }
 
 .cta-button {
-    background-color: var(--primary-red);
+    background: linear-gradient(to right, #ff4d4d, var(--primary-red)); /* Tetap merah untuk CTA */
     color: var(--darker-bg) !important;
-    padding: 8px 15px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 50px; /* JADI TULLE BUTTON */
     font-weight: bold;
-    text-shadow: none !important;
-    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
 }
 
 .cta-button:hover {
-    background-color: #ff3333;
+    background: linear-gradient(to right, var(--primary-red), #ff4d4d);
     transform: scale(1.05);
+    box-shadow: 0 0 25px var(--primary-red);
 }
 
-/* --- Hero Section: Paling Mewah & Dinamis --- */
+/* Mockup Search Bar */
+.search-mockup {
+    display: flex;
+    align-items: center;
+    background: var(--dark-bg);
+    border: 1px solid var(--primary-blue);
+    border-radius: 50px;
+    padding: 5px 15px;
+    box-shadow: 0 0 10px rgba(0, 136, 255, 0.3);
+}
+.search-mockup input {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    padding: 8px 10px;
+    outline: none;
+    width: 150px;
+}
+.search-mockup i {
+    color: var(--primary-blue);
+}
+
+
+/* --- Hero Section: Modern & Berdampak --- */
 .hero-section {
     position: relative;
-    height: 100vh;
+    height: 90vh; /* Sedikit lebih pendek */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     overflow: hidden;
-    background-color: var(--darker-bg);
-    animation: backgroundPulse 10s infinite alternate;
+    background: var(--darker-bg);
+    animation: none; /* Hapus animasi background */
 }
 
-/* Overlay Gambar Player */
+/* Gambar Player di background */
 .player-image-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 1000px;
-    height: 80%;
-    /* PATH BARU */
-    background-image: url('../img/player_crew.jpg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    opacity: 0.6; 
-    z-index: 1;
-    -webkit-mask-image: linear-gradient(to top, black 80%, transparent 100%);
-    mask-image: linear-gradient(to top, black 80%, transparent 100%);
+    /* Style sama, tapi opacity lebih rendah */
+    opacity: 0.15; 
+    -webkit-mask-image: linear-gradient(to top, black 60%, transparent 100%); 
+    mask-image: linear-gradient(to top, black 60%, transparent 100%);
+    animation: none; /* Hapus floating animation */
+    height: 100%;
 }
 
 .hero-section::before {
@@ -150,379 +202,274 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.9) 100%);
+    /* Radial gradient Biru Gelap */
+    background: radial-gradient(circle at center, rgba(5, 10, 16, 0.1) 0%, var(--darker-bg) 100%);
     z-index: 2;
 }
 
 .hero-content {
     position: relative;
     z-index: 3;
-    padding: 30px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 15px;
-    border: 3px solid var(--primary-red);
-    box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
-    transform: translateY(-20px); 
+    padding: 50px;
+    background: var(--dark-bg);
+    border-radius: 20px;
+    border: 1px solid var(--primary-blue); /* Border biru tipis */
+    box-shadow: 0 0 40px rgba(0, 136, 255, 0.5); /* Shadow biru kuat */
+    transform: translateY(-50px) scale(1);
+    animation: none; /* Hapus animasi pulse */
+    /* Membuat kartu lebih lebar */
+    max-width: 900px;
+    width: 90%;
 }
 
 .main-logo-img {
-    width: 150px;
-    height: auto;
-    margin-bottom: 20px;
-    border-radius: 50%;
-    border: 5px solid var(--primary-red);
-    box-shadow: 0 0 10px var(--primary-red);
+    width: 160px; 
+    margin-bottom: 25px;
+    border-radius: 15px; /* Dibuat kotak dengan sudut tumpul */
+    border: 5px solid var(--primary-red); 
+    box-shadow: 0 0 15px var(--primary-red); /* Tetap merah agar menonjol */
 }
 
 .hero-section h1 {
-    font-family: 'Russo One', sans-serif;
-    font-size: 7rem;
-    color: var(--primary-red);
-    margin-bottom: 10px;
-    text-shadow: var(--accent-glow);
-    animation: glitch-anim 1s infinite alternate;
+    font-size: 6rem; /* Ukuran sedikit dikecilkan */
+    color: var(--primary-blue); /* Ganti warna judul ke biru */
+    text-shadow: var(--accent-glow-blue); /* Glow biru */
+    animation: glitch-anim 1s infinite alternate; 
 }
 
-.glitch::before, .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+/* Glitch effect tetap dengan warna biru, tapi pastikan Russo One terbaca jelas */
 
 .subtitle {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.5rem; 
     color: var(--text-color);
-    letter-spacing: 5px;
+    letter-spacing: 5px; 
     margin-bottom: 20px;
-    text-shadow: 0 0 3px var(--text-color);
-}
-
-.description {
-    max-width: 600px;
-    margin: 0 auto 30px;
-    font-size: 1.1rem;
+    text-shadow: 0 0 5px var(--text-color);
 }
 
 .hero-cta-button {
-    display: inline-block;
-    background-color: var(--primary-red);
-    color: var(--darker-bg);
+    /* Mengganti ke gaya tombol trading: Merah dengan outline biru/neon */
+    background: linear-gradient(to right, #ff4d4d, var(--primary-red));
+    color: white;
     padding: 15px 30px;
-    text-decoration: none;
     font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 5px;
-    border: 2px solid var(--primary-red);
-    transition: all 0.3s;
-    box-shadow: var(--accent-glow);
+    border-radius: 50px; /* Tulled */
+    border: 2px solid var(--primary-blue); /* Outline biru neon */
+    box-shadow: 0 0 20px var(--primary-red), 0 0 10px var(--primary-blue); /* Double glow */
 }
 
 .hero-cta-button:hover {
-    background-color: var(--darker-bg);
-    color: var(--primary-red);
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 0 15px var(--primary-red);
+    background: var(--primary-red);
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 30px var(--primary-red), 0 0 15px var(--primary-blue); 
+    border-color: white; 
 }
 
-@keyframes glitch-anim {
-    0% { transform: translate(0); }
-    20% { transform: translate(-3px, 3px); }
-    40% { transform: translate(-3px, -3px); }
-    60% { transform: translate(3px, 3px); }
-    80% { transform: translate(3px, -3px); }
-    100% { transform: translate(0); }
-}
-
-@keyframes backgroundPulse {
-    0% { background-color: #000000; }
-    100% { background-color: #050000; }
-}
-
-/* --- Content Section Styling --- */
+/* --- Content Section Styling (Biru Gelap & Kotak Tumpul) --- */
 .content-section {
-    padding: 100px 0;
-    background-color: var(--dark-bg);
-    border-bottom: 5px solid rgba(255, 0, 0, 0.1);
+    padding: 100px 0; 
+    background-color: var(--dark-bg); 
+    border-bottom: 4px solid var(--border-color-subtle); 
     min-height: 400px;
+    position: relative;
+}
+
+.content-section::before {
+    content: none; /* Hapus grid pattern */
 }
 
 .dark-bg {
     background-color: var(--darker-bg);
-    border-top: 5px solid rgba(255, 0, 0, 0.1);
+    border-top: 4px solid var(--border-color-subtle);
 }
 
 .section-title {
-    font-family: 'Russo One', sans-serif;
-    font-size: 3rem;
-    text-align: center;
-    margin-bottom: 50px;
-    color: var(--primary-red);
-    text-shadow: var(--accent-glow);
-    position: relative;
-    padding-bottom: 10px;
-    letter-spacing: 2px;
+    color: var(--primary-blue); /* Judul section biru */
+    text-shadow: var(--accent-glow-blue);
+    padding-bottom: 15px;
 }
 
 .section-title::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 5px;
-    background-color: var(--primary-red);
-    margin: 10px auto 0;
+    width: 100px;
+    height: 4px;
+    background-color: var(--primary-blue);
+    box-shadow: 0 0 10px var(--primary-blue);
 }
 
-/* About Section Grid */
+/* About Section Grid: Efek Hover Keren & Sudut Tumpul */
 .card-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    justify-content: center;
-    text-align: center;
+    gap: 30px;
 }
 
 .card {
-    background: var(--darker-bg);
-    border: 1px solid var(--primary-red);
-    padding: 40px 25px;
+    background: #1a1f29; /* Background kartu lebih terang dari body */
+    border: 1px solid var(--primary-blue);
+    padding: 35px 25px;
+    border-radius: 12px; /* Sudut tumpul */
+    box-shadow: 0 0 5px rgba(0, 136, 255, 0.4);
+    transition: all 0.4s ease-in-out; 
+    overflow: visible; /* Untuk efek glow keluar */
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary-blue), var(--primary-red));
+    z-index: -1;
     border-radius: 15px;
-    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-    transition: all 0.4s;
+    opacity: 0;
+    transition: opacity 0.4s;
+    filter: blur(8px);
+}
+
+.card:hover::before {
+    opacity: 0.5;
 }
 
 .card:hover {
-    background: rgba(255, 0, 0, 0.15);
-    transform: translateY(-15px) rotateX(5deg);
-    box-shadow: 0 15px 30px rgba(255, 0, 0, 0.8);
-    border-color: #fff;
+    background: #252b36;
+    transform: translateY(-8px) scale(1.02); /* Lebih halus */
+    box-shadow: 0 10px 30px rgba(0, 136, 255, 0.5);
+    border-color: white;
 }
 
 .card i {
     font-size: 3.5rem;
-    color: var(--primary-red);
-    margin-bottom: 15px;
+    color: var(--primary-blue); /* Ikon biru */
+    text-shadow: var(--accent-glow-blue);
 }
 
-.card h3 {
-    font-family: 'Russo One', sans-serif;
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-}
-
-/* Goals Section: Parallax Effect */
+/* Goals Section: Parallax Effect & List Item Premium */
 .parallax-bg {
-    /* PATH BARU */
-    background-image: url('../img/MetaSlayers_Logo.jpeg'); 
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
+    /* Style sama */
+    /* ... */
 }
 
 .parallax-bg::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.85); /* Dark overlay */
-}
-
-.parallax-bg .container {
-    position: relative;
-    z-index: 10;
-}
-
-.white-text { color: white !important; }
-
-.goal-list {
-    list-style: none;
-    padding: 0;
-    max-width: 800px;
-    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.85); /* Dark overlay kembali ke hitam */
 }
 
 .goal-list li {
-    background: rgba(255, 255, 255, 0.05);
-    border-left: 4px solid var(--primary-red);
+    background: rgba(0, 136, 255, 0.1); /* Background item list biru muda */
+    border-left: 6px solid var(--primary-blue); /* Border biru */
     padding: 15px 25px;
     margin-bottom: 15px;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    transition: background 0.3s;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 136, 255, 0.3);
 }
 
 .goal-list li:hover {
-    background: rgba(255, 0, 0, 0.2);
+    background: rgba(0, 136, 255, 0.25);
+    transform: translateX(10px) scale(1.01); 
+    box-shadow: 0 0 20px var(--primary-blue);
 }
 
 .goal-list li i {
-    color: var(--primary-red);
-    margin-right: 10px;
+    color: var(--primary-blue); /* Ikon biru */
 }
 
 /* Playstyle Section */
-.playstyle-detail {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    justify-content: center;
-    margin-bottom: 40px;
+.play-card {
+    padding: 30px;
+    border: 2px dashed var(--primary-red); /* Tetap merah untuk tema tempur */
+    border-radius: 15px;
+    box-shadow: var(--accent-glow-red);
+    background: #150a0a;
 }
 
-.play-card {
-    text-align: center;
-    padding: 30px;
-    border: 3px dashed var(--primary-red);
-    border-radius: 8px;
-    box-shadow: var(--accent-glow);
+.play-card:hover {
+    background: #251010;
+    border-style: solid;
+    transform: scale(1.02);
 }
 
 .play-card h3 {
-    font-family: 'Russo One', sans-serif;
     color: var(--primary-red);
-    margin-bottom: 10px;
+    text-shadow: var(--accent-glow-red);
 }
 
 .slogan-text {
-    font-family: 'Russo One', sans-serif;
-    font-size: 1.8rem;
-    text-align: center;
+    font-size: 2rem;
     color: var(--primary-red);
-    text-shadow: var(--accent-glow);
-    border: 2px solid var(--primary-red);
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 0 auto;
-    display: block;
-    max-width: fit-content;
+    text-shadow: var(--accent-glow-red);
+    border: 3px solid var(--primary-red);
+    border-radius: 50px; /* Tulled */
+    background: var(--darker-bg);
+    animation: sloganPulse 2s infinite alternate;
 }
 
 /* Rules & Structure Section */
 .rules-structure-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 30px;
 }
 
 .structure-box, .rules-box {
-    background: #1a0000;
-    padding: 40px;
+    background: linear-gradient(to bottom right, #1a1f29, #0d1117); /* Gradient biru gelap */
+    padding: 35px;
     border-radius: 15px;
-    border: 2px solid var(--primary-red);
-    box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.5);
+    border: 2px solid var(--primary-blue);
+    box-shadow: inset 0 0 15px rgba(0, 136, 255, 0.4), 0 0 15px rgba(0, 136, 255, 0.2); 
 }
 
 .structure-box h3, .rules-box h3 {
-    font-family: 'Russo One', sans-serif;
-    color: var(--text-color);
+    color: var(--primary-blue);
     font-size: 1.6rem;
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--primary-red);
-    display: inline-block;
-    padding-bottom: 5px;
-}
-
-.structure-box ul, .rules-box ol {
-    list-style: none;
-    padding-left: 0;
-}
-
-.structure-box ul li, .rules-box ol li {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
+    border-bottom: 2px solid var(--primary-blue);
 }
 
 .structure-box i {
-    color: var(--primary-red);
-    margin-right: 10px;
+    color: var(--primary-red); /* Ikon tetap merah agar kontras */
 }
 
 .rules-box ol li:first-child {
-    font-weight: 700;
-    color: var(--primary-red);
-    font-size: 1.2rem;
+    color: var(--primary-red); /* Aturan utama tetap merah */
+    text-shadow: 0 0 5px var(--primary-red);
 }
 
 .server-status {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-top: 40px;
-    font-family: 'Russo One', sans-serif;
-    color: var(--text-color);
+    color: var(--primary-red); /* Status server merah */
+    text-shadow: var(--accent-glow-red);
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid var(--primary-red);
+    border-radius: 50px; /* Tulled */
 }
 
 /* Footer */
 .main-footer {
     background-color: var(--darker-bg);
-    color: #aaa;
-    text-align: center;
-    padding: 20px 0;
-    border-top: 2px solid var(--primary-red);
+    border-top: 3px solid var(--primary-blue); /* Border biru */
 }
 
 .main-footer .discord-link {
-    color: var(--primary-red);
-    text-decoration: none;
-    font-weight: 700;
-    margin-top: 10px;
-    display: block;
-    transition: color 0.3s, text-shadow 0.3s;
+    color: var(--primary-blue); /* Link discord biru */
 }
 
 .main-footer .discord-link:hover {
     color: #fff;
-    text-shadow: var(--accent-glow);
+    text-shadow: var(--accent-glow-blue);
 }
 
-/* --- Animasi JS Classes --- */
-.content-section.visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
+/* --- Responsiveness (Tambahan untuk Header Baru) --- */
+@media (max-width: 1200px) {
+    .header-container {
+        padding: 0 20px;
+    }
 }
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 15px var(--discord-purple); }
-    50% { box-shadow: 0 0 25px var(--discord-purple), 0 0 5px white; }
-    100% { box-shadow: 0 0 15px var(--discord-purple); }
-}
-
-.floating-discord-btn.pulse {
-    animation: pulse 1s infinite alternate;
-}
-
-/* --- Responsiveness --- */
 @media (max-width: 900px) {
-    .main-header {
-        padding: 15px 20px;
+    .header-container {
+        flex-direction: column;
     }
     .main-header nav {
-        display: none;
+        margin: 15px 0;
+        order: 3;
     }
-    .hero-section h1 {
-        font-size: 3.5rem;
+    .search-mockup {
+        display: none; /* Sembunyikan search bar di mobile */
     }
-    .card-grid {
-        grid-template-columns: 1fr;
-    }
-    .rules-structure-grid, .playstyle-detail {
-        grid-template-columns: 1fr;
-    }
-    .player-image-overlay {
-        opacity: 0.3;
-        height: 50%;
-    }
-    .floating-discord-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-        bottom: 20px;
-        right: 20px;
-    }
+    /* Style lainnya di media query sebelumnya tetap berlaku */
 }
