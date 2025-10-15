@@ -251,9 +251,9 @@ body::before {
     100% { box-shadow: 0 0 40px var(--primary-red); }
 }
 
-
 .main-logo-img {
-    display: none; /* Logo di dalam hero content dihilangkan karena ada di header */
+    /* Hapus atau ubah 'display: none' agar gambar di hero content bisa muncul! */
+    display: block; 
 }
 
 /* --- PERBAIKAN JUDUL HERO SECTION DI SINI --- */
