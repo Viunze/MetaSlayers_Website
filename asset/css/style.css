@@ -38,6 +38,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
+    /* Pattern Hexagon/Crack yang sangat subtil */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='rgba(0, 0, 0, 0)'/%3E%3Cpath d='M20 0 L0 10 L0 30 L20 40 L40 30 L40 10 Z' fill='rgba(255, 0, 0, 0.03)' transform='translate(30 30) rotate(0)'/%3E%3C/svg%3E");
     background-size: 200px 200px;
     opacity: 0.8;
@@ -59,8 +60,6 @@ body::before {
 
 /* --- Floating Discord Button --- */
 .floating-discord-btn {
-    /* Style tetap sama */
-    /* ... */
     position: fixed;
     bottom: 30px;
     right: 30px;
@@ -90,7 +89,6 @@ body::before {
 
 /* --- Header & Navigasi (Minimalis Agresif) --- */
 .main-header {
-    /* Style tetap sama */
     background: rgba(0, 0, 0, 0.98);
     backdrop-filter: blur(8px);
     position: sticky;
@@ -112,7 +110,7 @@ body::before {
 
 .logo {
     font-family: var(--title-font);
-    font-size: 2.2rem; /* Dikecilkan */
+    font-size: 2.2rem; 
     letter-spacing: 4px;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
@@ -131,29 +129,62 @@ body::before {
 
 
 .main-header nav {
-    flex-grow: 0; /* Navigasi tidak memanjang */
+    flex-grow: 0; 
     margin: 0;
     text-align: right;
 }
 
 .main-header nav a {
-    font-size: 1rem; /* Dikecilkan */
-    margin: 0 15px; /* Jarak antar menu dikecilkan */
-    padding-bottom: 5px;
-    text-decoration: none;
     color: var(--text-color);
+    text-decoration: none;
+    margin: 0 15px; 
     font-weight: 600;
+    font-size: 1rem; 
     transition: color 0.3s, text-shadow 0.3s, transform 0.3s;
     position: relative;
+    padding-bottom: 5px;
 }
 
 .main-header nav a::after {
-    height: 2px; /* Lebih tipis */
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px; 
+    background-color: var(--primary-red);
+    left: 50%; 
+    transform: translateX(-50%);
+    bottom: 0px;
+    transition: width 0.3s ease-out;
+    border-radius: 5px;
+    box-shadow: 0 0 8px var(--primary-red);
+}
+
+.main-header nav a:hover::after {
+    width: 100%;
+}
+
+.main-header nav a:hover {
+    color: var(--primary-red);
+    text-shadow: var(--accent-glow);
+    transform: translateY(-2px);
 }
 
 .cta-button {
+    background: var(--primary-red);
+    color: var(--darker-bg) !important;
     padding: 8px 18px; /* Dikecilkan */
     border-radius: 4px; 
+    font-weight: bold;
+    text-shadow: none !important;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    border: none;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+}
+
+.cta-button:hover {
+    background: #cc0000;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--primary-red), 0 0 10px white;
 }
 
 
@@ -161,26 +192,58 @@ body::before {
 .hero-section {
     position: relative;
     height: 85vh; /* Dikecilkan */
-    padding-top: 50px;
-    padding-bottom: 50px;
-    background: linear-gradient(to bottom, #000000 0%, #300000 100%);
     display: flex;
+    justify-content: center;
     align-items: center;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #000000 0%, #300000 100%); 
 }
 
 /* Overlay Gambar Player */
 .player-image-overlay {
+    position: absolute;
     bottom: -10px; /* Ditarik sedikit ke atas */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    /* PATH GAMBAR BLOX FRUITS CREW */
+    background-image: url('../img/player_crew.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
     opacity: 0.08; /* Opacity lebih rendah */
+    z-index: 1;
+    /* Masking api/lava */
+    -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%); 
+    mask-image: linear-gradient(to top, black 50%, transparent 100%);
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 70%, rgba(0, 0, 0, 1) 100%);
+    z-index: 2;
 }
 
 .hero-content {
+    position: relative;
+    z-index: 3;
     padding: 40px; /* Padding dikurangi */
+    background: rgba(0, 0, 0, 0.85); 
     border-radius: 4px; /* Kotak lebih tajam */
     border: 3px solid var(--primary-red); /* Border lebih tipis */
     box-shadow: 0 0 40px rgba(255, 0, 0, 0.8); /* Shadow dikurangi */
+    transform: translateY(-30px);
     max-width: 800px; /* Ukuran kotak konten dikecilkan */
     width: 90%;
+    animation: borderGlow 2s infinite alternate; 
 }
 
 @keyframes borderGlow {
@@ -192,26 +255,39 @@ body::before {
 .main-logo-img {
     display: none; /* Logo di dalam hero content dihilangkan karena ada di header */
 }
-.hero-content .glitch {
-    margin-top: 0; /* Diangkat ke atas */
-}
 
 .hero-section h1 {
+    font-family: var(--title-font);
     font-size: 6rem; /* Dikecilkan */
-    letter-spacing: 6px; /* Dikecilkan */
+    color: var(--primary-red);
     margin-bottom: 15px;
+    text-shadow: var(--accent-glow);
+    animation: glitch-anim 1.5s infinite alternate ease-in-out; 
+    letter-spacing: 6px; /* Dikecilkan */
+}
+
+@keyframes glitch-anim {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
 }
 
 .subtitle {
     font-size: 1.5rem; /* Dikecilkan */
+    font-weight: 700;
+    color: var(--text-color);
     letter-spacing: 5px; 
     margin-bottom: 25px;
+    text-shadow: 0 0 8px var(--text-color);
 }
 
 .description {
-    font-size: 1.1rem; /* Dikecilkan */
     max-width: 650px;
     margin: 0 auto 35px;
+    font-size: 1.1rem; /* Dikecilkan */
 }
 
 .hero-cta-button {
@@ -220,100 +296,284 @@ body::before {
     border: 2px solid white; /* Border lebih tipis */
 }
 
+.hero-cta-button:hover {
+    background: #cc0000;
+    color: white; 
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 0 40px var(--primary-red);
+    border-color: var(--primary-red); 
+}
+
 
 /* --- Content Section Styling --- */
 .content-section {
     padding: 90px 0; /* Padding dikurangi */
+    background-color: var(--dark-bg); 
+    border-bottom: 4px solid var(--primary-red); 
+    min-height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dark-bg {
+    background-color: var(--darker-bg);
+    border-top: 4px solid var(--primary-red);
 }
 
 .section-title {
+    font-family: var(--title-font);
     font-size: 3rem; /* Dikecilkan */
+    text-align: center;
     margin-bottom: 50px; /* Margin dikurangi */
+    color: var(--primary-red);
+    text-shadow: var(--accent-glow);
+    position: relative;
+    padding-bottom: 15px;
+    letter-spacing: 4px;
 }
 
 .section-title::after {
+    content: '';
+    display: block;
     width: 100px; /* Dikecilkan */
     height: 4px; /* Dikecilkan */
+    background-color: var(--primary-red);
+    margin: 15px auto 0;
+    box-shadow: 0 0 15px var(--primary-red);
 }
 
 /* About Section Grid: Kartu "Rune" Berkedip */
 .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px; /* Jarak antar kartu dikurangi */
 }
 
 .card {
-    padding: 30px 25px; /* Padding dikurangi */
+    background: linear-gradient(to bottom, #100000, #050000); 
     border: 1px solid var(--primary-red); /* Border lebih tipis */
+    padding: 30px 25px; /* Padding dikurangi */
+    border-radius: 0; 
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    animation: borderFlicker 4s infinite alternate; 
+}
+
+@keyframes borderFlicker {
+    0%, 100% { border-color: var(--primary-red); box-shadow: 0 0 5px var(--primary-red); }
+    50% { border-color: #550000; box-shadow: none; }
 }
 
 .card:hover {
+    background: linear-gradient(to bottom, #200000, #100000);
     transform: translateY(-8px) scale(1.02); /* Efek hover dikurangi */
+    box-shadow: 0 15px 40px rgba(255, 0, 0, 1);
+    border-color: white;
+    animation: none; 
 }
 
 .card i {
     font-size: 3rem; /* Dikecilkan */
+    color: var(--primary-red); 
     margin-bottom: 15px;
+    text-shadow: var(--accent-glow);
 }
 
 .card h3 {
+    font-family: var(--title-font);
+    margin-bottom: 15px;
     font-size: 1.8rem; /* Dikecilkan */
 }
 
 
 /* Goals Section: Parallax Effect & List Item Premium */
-.goal-list li {
-    padding: 15px 25px; /* Padding dikurangi */
-    border-left: 5px solid var(--primary-red); /* Border lebih tipis */
-    font-size: 1.05rem; /* Dikecilkan */
+.parallax-bg {
+    background-image: url('../img/MetaSlayers_Logo.jpeg'); 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
 }
+
+.parallax-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95); 
+    z-index: 0;
+}
+
+.parallax-bg .container {
+    position: relative;
+    z-index: 10;
+}
+
+.white-text { color: white !important; }
+
+.goal-list {
+    list-style: none;
+    padding: 0;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.goal-list li {
+    background: rgba(255, 0, 0, 0.1); 
+    border-left: 5px solid var(--primary-red); /* Border lebih tipis */
+    padding: 15px 25px; /* Padding dikurangi */
+    margin-bottom: 15px;
+    border-radius: 0; 
+    font-size: 1.05rem; /* Dikecilkan */
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.goal-list li:hover {
+    background: rgba(255, 0, 0, 0.25);
+    transform: translateX(10px) scale(1.01); 
+    box-shadow: 0 0 25px var(--primary-red);
+}
+
+.goal-list li i {
+    color: var(--primary-red); 
+    margin-right: 15px;
+    font-size: 1.3rem;
+}
+
 
 /* Playstyle Section */
 .playstyle-detail {
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Kolom lebih rapat */
     gap: 30px; 
+    margin-bottom: 50px;
 }
 .play-card {
+    text-align: center;
     padding: 30px;
     border: 3px solid var(--primary-red); /* Border lebih tipis */
+    border-radius: 0;
+    box-shadow: var(--accent-glow);
+    background: #1a0000;
+    transition: all 0.3s;
+}
+
+.play-card:hover {
+    border-color: white;
+    background: #2a0000;
+    transform: scale(1.02);
 }
 
 .play-card h3 {
+    font-family: var(--title-font);
+    color: var(--primary-red);
+    margin-bottom: 15px;
     font-size: 1.6rem; /* Dikecilkan */
+    text-shadow: var(--accent-glow);
 }
 
 .slogan-text {
+    font-family: var(--title-font);
     font-size: 2rem; /* Dikecilkan */
-    padding: 10px 25px;
+    text-align: center;
+    color: var(--primary-red);
+    text-shadow: var(--accent-glow);
     border: 3px solid var(--primary-red);
+    display: inline-block;
+    padding: 10px 25px;
+    margin: 0 auto;
+    display: block;
+    max-width: fit-content;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.7);
+    animation: sloganPulse 2s infinite alternate;
+}
+
+@keyframes sloganPulse {
+    0% { transform: scale(1); box-shadow: var(--accent-glow); }
+    100% { transform: scale(1.02); box-shadow: 0 0 20px var(--primary-red), 0 0 5px white; }
 }
 
 
 /* Rules & Structure Section */
 .rules-structure-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
 }
 
 .structure-box, .rules-box {
+    background: linear-gradient(to bottom right, #1a0000, #050000); 
     padding: 35px; /* Padding dikurangi */
+    border-radius: 0;
     border: 2px solid var(--primary-red); /* Border lebih tipis */
+    box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.7), 0 0 10px rgba(255, 0, 0, 0.3); 
 }
 
 .structure-box h3, .rules-box h3 {
+    font-family: var(--title-font);
+    color: var(--primary-red);
     font-size: 1.5rem; /* Dikecilkan */
     margin-bottom: 20px;
     border-bottom: 2px solid var(--primary-red);
+    display: inline-block;
+    padding-bottom: 8px;
+    text-shadow: 0 0 5px white;
+}
+
+.structure-box ul, .rules-box ol {
+    list-style: none;
+    padding-left: 0;
 }
 
 .structure-box ul li, .rules-box ol li {
     margin-bottom: 15px;
-    font-size: 1.1rem; /* Dikecilkan */
+    font-size: 1.05rem; /* Dikecilkan agar rapi */
+    color: #ddd;
+}
+
+.structure-box i {
+    color: var(--primary-red); 
+    margin-right: 12px;
+    font-size: 1.25rem;
+}
+
+/* KODE BARU: Styling untuk tag <strong> (menggantikan **) */
+.structure-box strong, .rules-box strong {
+    font-weight: 700; /* Pastikan tebal */
+    color: var(--primary-red); /* Beri warna merah untuk penekanan */
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Beri sedikit shadow */
+}
+
+.rules-box ol li:first-child strong {
+    font-size: 1.15rem; /* Lebih besar dari yang lain */
+    color: white; /* Beri warna putih agar kontras */
+    text-shadow: var(--accent-glow);
 }
 
 .server-status {
+    text-align: center;
     font-size: 1.5rem; /* Dikecilkan */
+    margin-top: 50px;
+    font-family: var(--title-font);
+    color: var(--primary-red); 
+    text-shadow: var(--accent-glow);
+    background: rgba(255, 0, 0, 0.15);
     padding: 10px 20px;
+    border-radius: 0;
+    border: 2px solid var(--primary-red);
+    display: inline-block;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
-
 
 /* --- START: Perbaikan Form Pendaftaran (JOIN.HTML) --- */
 .join-page .content-section {
@@ -323,7 +583,7 @@ body::before {
 }
 
 .form-container {
-    max-width: 600px; /* Lebar form dibatasi agar rapi */
+    max-width: 600px; 
     margin: 40px auto;
     background: #1a0000;
     border: 3px solid var(--primary-red);
@@ -405,7 +665,6 @@ body::before {
     transform: translateY(-2px);
     box-shadow: 0 5px 20px var(--primary-red);
 }
-
 /* --- END: Perbaikan Form Pendaftaran (JOIN.HTML) --- */
 
 
