@@ -1,17 +1,17 @@
 /* Import Font dari fonts.css */
 @import url('fonts.css');
 
-/* Reset dan Styling Global (Fokus ke Black, Red, dan Agresif) */
+/* Reset dan Styling Global */
 :root {
     --primary-red: #ff0000;
-    --dark-bg: #100000; /* Hitam dengan sedikit hint merah tua */
-    --darker-bg: #000000; /* Hitam pekat */
+    --primary-blue: #0088ff; /* Warna aksen biru baru, ala neon */
+    --dark-bg: #0d1117; /* Biru gelap ala GitHub/modern dark mode */
+    --darker-bg: #050a10; /* Biru gelap pekat untuk body */
     --text-color: #f0f0f0;
-    --accent-glow: 0 0 10px var(--primary-red), 0 0 30px rgba(255, 0, 0, 0.7), 0 0 50px rgba(255, 0, 0, 0.3); /* Glow sangat kuat */
+    --accent-glow-red: 0 0 8px var(--primary-red), 0 0 20px rgba(255, 0, 0, 0.8);
+    --accent-glow-blue: 0 0 8px var(--primary-blue), 0 0 20px rgba(0, 136, 255, 0.8); /* Glow biru baru */
     --discord-purple: #5865F2;
-    --subtle-gray: #1a1a1a;
-    --title-font: 'Metal Mania', cursive; /* Font judul baru */
-    --body-font: 'Poppins', sans-serif; /* Font body baru */
+    --border-color-subtle: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -22,35 +22,20 @@
 }
 
 body {
-    font-family: var(--body-font);
+    font-family: 'Montserrat', sans-serif;
     background-color: var(--darker-bg); 
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
+    /* Menghilangkan background noise/pattern agar terlihat lebih clean */
 }
 
-/* Latar Belakang Tekstur (Retak/Lava) - Ini yang menghilangkan kesan basic */
+/* Menghilangkan body::before yang membuat pattern */
 body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Pattern Hexagon/Crack yang sangat subtil */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='rgba(0, 0, 0, 0)'/%3E%3Cpath d='M20 0 L0 10 L0 30 L20 40 L40 30 L40 10 Z' fill='rgba(255, 0, 0, 0.03)' transform='translate(30 30) rotate(0)'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-    opacity: 0.8;
-    z-index: -1;
-    pointer-events: none;
-    animation: subtleMove 60s linear infinite; /* Gerakan subtil */
+    content: none;
 }
 
-@keyframes subtleMove {
-    from { background-position: 0 0; }
-    to { background-position: 200px 200px; }
-}
 
 .container {
     max-width: 1200px;
@@ -60,28 +45,30 @@ body::before {
 
 /* --- Floating Discord Button --- */
 .floating-discord-btn {
-    /* Kembali ke glow Merah untuk konsistensi, tapi ikon tetap Discord */
-    background-color: var(--discord-purple);
-    box-shadow: 0 0 15px var(--primary-red);
+    /* Mengganti glow menjadi biru */
+    box-shadow: 0 0 15px var(--discord-purple);
     z-index: 2000;
+    /* Style lainnya sama */
+    /* ... */
 }
 
 .floating-discord-btn:hover {
-    transform: scale(1.15) rotate(7deg);
-    box-shadow: 0 0 35px var(--primary-red), 0 0 10px white;
-    background-color: var(--discord-purple);
+    /* Mengganti glow menjadi biru */
+    box-shadow: 0 0 35px var(--discord-purple), 0 0 10px white;
+    /* Style lainnya sama */
+    /* ... */
 }
 
-/* --- Header & Navigasi (Minimalis Agresif) --- */
+/* --- Header & Navigasi Premium (Gaya Website Trading) --- */
 .main-header {
-    background: rgba(0, 0, 0, 0.98);
-    backdrop-filter: blur(8px);
+    background: var(--darker-bg); /* Warna solid dark blue */
+    backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
     z-index: 1000;
     padding: 15px 0;
-    border-bottom: 4px solid var(--primary-red);
-    box-shadow: 0 5px 25px rgba(255, 0, 0, 0.5); 
+    border-bottom: 2px solid var(--primary-blue); /* Border biru */
+    box-shadow: 0 5px 25px rgba(0, 136, 255, 0.3); /* Shadow biru */
 }
 
 .header-container {
@@ -94,24 +81,18 @@ body::before {
 }
 
 .logo {
-    font-family: var(--title-font); /* Font Judul Baru */
-    font-size: 2.5rem; /* Lebih besar */
-    letter-spacing: 5px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    font-family: 'Russo One', sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 4px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
 }
 
 .meta-text { color: var(--text-color); }
 .slayers-text { 
-    color: var(--primary-red); 
-    text-shadow: var(--accent-glow); 
-    animation: textFlicker 2s infinite alternate; 
+    color: var(--primary-red); /* Tetap merah agar logo menonjol */
+    text-shadow: var(--accent-glow-red); 
+    animation: none; /* Menghilangkan flicker yang mungkin mengganggu */
 }
-
-@keyframes textFlicker {
-    0%, 100% { opacity: 1; text-shadow: var(--accent-glow); }
-    50% { opacity: 0.8; text-shadow: none; }
-}
-
 
 .main-header nav {
     flex-grow: 1;
@@ -121,75 +102,97 @@ body::before {
 
 .main-header nav a {
     color: var(--text-color);
+    text-decoration: none;
     margin: 0 20px;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     transition: color 0.3s, text-shadow 0.3s;
+    position: relative;
+    padding-bottom: 5px;
 }
 
 .main-header nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
     height: 3px;
-    background-color: var(--primary-red);
-    box-shadow: 0 0 8px var(--primary-red);
+    background-color: var(--primary-blue); /* Underline biru */
+    left: 50%; /* Mulai dari tengah */
+    transform: translateX(-50%);
+    bottom: 0px;
+    transition: width 0.3s ease-out;
+    border-radius: 5px;
+}
+
+.main-header nav a:hover::after {
+    width: 100%;
 }
 
 .main-header nav a:hover {
-    color: var(--primary-red);
-    text-shadow: var(--accent-glow);
+    color: var(--primary-blue); /* Teks biru saat hover */
+    text-shadow: 0 0 10px var(--primary-blue);
+    transform: none;
 }
 
 .cta-button {
-    background: var(--primary-red);
+    background: linear-gradient(to right, #ff4d4d, var(--primary-red)); /* Tetap merah untuk CTA */
     color: var(--darker-bg) !important;
     padding: 10px 20px;
-    border-radius: 5px; /* Kembali ke kotak tajam */
+    border-radius: 50px; /* JADI TULLE BUTTON */
     font-weight: bold;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
 }
 
 .cta-button:hover {
-    background: #cc0000;
+    background: linear-gradient(to right, var(--primary-red), #ff4d4d);
     transform: scale(1.05);
-    box-shadow: 0 0 25px var(--primary-red), 0 0 10px white;
+    box-shadow: 0 0 25px var(--primary-red);
 }
 
-/* Mockup Search Bar - Dihapus karena tidak sesuai vibe */
+/* Mockup Search Bar */
 .search-mockup {
-    display: none;
+    display: flex;
+    align-items: center;
+    background: var(--dark-bg);
+    border: 1px solid var(--primary-blue);
+    border-radius: 50px;
+    padding: 5px 15px;
+    box-shadow: 0 0 10px rgba(0, 136, 255, 0.3);
+}
+.search-mockup input {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    padding: 8px 10px;
+    outline: none;
+    width: 150px;
+}
+.search-mockup i {
+    color: var(--primary-blue);
 }
 
 
-/* --- Hero Section: Paling Mewah & Dinamis --- */
+/* --- Hero Section: Modern & Berdampak --- */
 .hero-section {
     position: relative;
-    height: 95vh;
+    height: 90vh; /* Sedikit lebih pendek */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     overflow: hidden;
-    background: linear-gradient(to bottom, #000000 0%, #300000 100%); /* Hitam ke merah tua */
+    background: var(--darker-bg);
+    animation: none; /* Hapus animasi background */
 }
 
-/* Overlay Gambar Player */
+/* Gambar Player di background */
 .player-image-overlay {
-    position: absolute;
-    bottom: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 1400px;
+    /* Style sama, tapi opacity lebih rendah */
+    opacity: 0.15; 
+    -webkit-mask-image: linear-gradient(to top, black 60%, transparent 100%); 
+    mask-image: linear-gradient(to top, black 60%, transparent 100%);
+    animation: none; /* Hapus floating animation */
     height: 100%;
-    /* PATH GAMBAR BLOX FRUITS CREW */
-    background-image: url('../img/player_crew.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    opacity: 0.1; /* Opacity sangat rendah */
-    z-index: 1;
-    /* Masking api/lava */
-    -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%); 
-    mask-image: linear-gradient(to top, black 50%, transparent 100%);
 }
 
 .hero-section::before {
@@ -199,8 +202,8 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    /* Radial gradient hitam yang gelap sekali */
-    background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 70%, rgba(0, 0, 0, 1) 100%);
+    /* Radial gradient Biru Gelap */
+    background: radial-gradient(circle at center, rgba(5, 10, 16, 0.1) 0%, var(--darker-bg) 100%);
     z-index: 2;
 }
 
@@ -208,259 +211,265 @@ body::before {
     position: relative;
     z-index: 3;
     padding: 50px;
-    background: rgba(0, 0, 0, 0.85); 
-    border-radius: 5px; /* Kotak tajam */
-    border: 4px solid var(--primary-red);
-    box-shadow: 0 0 50px rgba(255, 0, 0, 1); /* Shadow terkuat */
-    transform: translateY(-30px);
+    background: var(--dark-bg);
+    border-radius: 20px;
+    border: 1px solid var(--primary-blue); /* Border biru tipis */
+    box-shadow: 0 0 40px rgba(0, 136, 255, 0.5); /* Shadow biru kuat */
+    transform: translateY(-50px) scale(1);
+    animation: none; /* Hapus animasi pulse */
+    /* Membuat kartu lebih lebar */
     max-width: 900px;
     width: 90%;
-    animation: borderGlow 2s infinite alternate; /* Animasi Border Glow */
 }
-
-@keyframes borderGlow {
-    0% { box-shadow: 0 0 20px var(--primary-red); }
-    100% { box-shadow: 0 0 50px var(--primary-red); }
-}
-
 
 .main-logo-img {
-    width: 200px; /* Logo lebih besar */
-    margin-bottom: 30px;
-    border-radius: 0; /* Kotak tajam */
-    border: 0; /* Menghilangkan border karena logonya sudah bagus */
-    box-shadow: none;
+    width: 160px; 
+    margin-bottom: 25px;
+    border-radius: 15px; /* Dibuat kotak dengan sudut tumpul */
+    border: 5px solid var(--primary-red); 
+    box-shadow: 0 0 15px var(--primary-red); /* Tetap merah agar menonjol */
 }
 
 .hero-section h1 {
-    font-family: var(--title-font); /* Font Judul Baru */
-    font-size: 8rem; 
-    color: var(--primary-red);
-    margin-bottom: 20px;
-    text-shadow: var(--accent-glow);
-    animation: glitch-anim 1.5s infinite alternate ease-in-out; 
-    letter-spacing: 8px; /* Lebih lebar */
+    font-size: 6rem; /* Ukuran sedikit dikecilkan */
+    color: var(--primary-blue); /* Ganti warna judul ke biru */
+    text-shadow: var(--accent-glow-blue); /* Glow biru */
+    animation: glitch-anim 1s infinite alternate; 
 }
 
-/* Glitch effect harus tetap dipertahankan */
+/* Glitch effect tetap dengan warna biru, tapi pastikan Russo One terbaca jelas */
 
 .subtitle {
-    font-size: 1.8rem; 
-    font-weight: 700;
+    font-size: 1.5rem; 
     color: var(--text-color);
-    letter-spacing: 6px; 
-    margin-bottom: 30px;
-    text-shadow: 0 0 8px var(--text-color);
-}
-
-.description {
-    max-width: 700px;
-    margin: 0 auto 50px;
-    font-size: 1.2rem;
+    letter-spacing: 5px; 
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px var(--text-color);
 }
 
 .hero-cta-button {
-    background: var(--primary-red);
+    /* Mengganti ke gaya tombol trading: Merah dengan outline biru/neon */
+    background: linear-gradient(to right, #ff4d4d, var(--primary-red));
     color: white;
-    padding: 18px 35px; 
-    font-size: 1.3rem;
-    border-radius: 5px; 
-    border: 3px solid white; /* Border putih kontras */
-    box-shadow: 0 0 25px var(--primary-red);
-    letter-spacing: 2px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 50px; /* Tulled */
+    border: 2px solid var(--primary-blue); /* Outline biru neon */
+    box-shadow: 0 0 20px var(--primary-red), 0 0 10px var(--primary-blue); /* Double glow */
 }
 
 .hero-cta-button:hover {
-    background: #cc0000;
-    color: white; 
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 0 40px var(--primary-red);
-    border-color: var(--primary-red); 
+    background: var(--primary-red);
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 30px var(--primary-red), 0 0 15px var(--primary-blue); 
+    border-color: white; 
 }
 
-
-/* --- Content Section Styling (Fokus ke Merah dan Tekstur) --- */
+/* --- Content Section Styling (Biru Gelap & Kotak Tumpul) --- */
 .content-section {
-    padding: 120px 0; 
+    padding: 100px 0; 
     background-color: var(--dark-bg); 
-    border-bottom: 4px solid var(--primary-red); 
+    border-bottom: 4px solid var(--border-color-subtle); 
+    min-height: 400px;
     position: relative;
-    overflow: hidden;
+}
+
+.content-section::before {
+    content: none; /* Hapus grid pattern */
 }
 
 .dark-bg {
     background-color: var(--darker-bg);
-    border-top: 4px solid var(--primary-red);
+    border-top: 4px solid var(--border-color-subtle);
 }
 
 .section-title {
-    font-family: var(--title-font);
-    font-size: 3.5rem; 
-    color: var(--primary-red);
-    text-shadow: var(--accent-glow);
-    letter-spacing: 4px;
+    color: var(--primary-blue); /* Judul section biru */
+    text-shadow: var(--accent-glow-blue);
+    padding-bottom: 15px;
 }
 
 .section-title::after {
-    width: 120px;
-    height: 5px;
-    background-color: var(--primary-red);
-    box-shadow: 0 0 15px var(--primary-red);
+    width: 100px;
+    height: 4px;
+    background-color: var(--primary-blue);
+    box-shadow: 0 0 10px var(--primary-blue);
 }
 
-/* About Section Grid: Kartu "Rune" Berkedip */
+/* About Section Grid: Efek Hover Keren & Sudut Tumpul */
+.card-grid {
+    gap: 30px;
+}
+
 .card {
-    background: linear-gradient(to bottom, #100000, #050000); 
-    border: 2px solid var(--primary-red);
-    padding: 40px 30px; 
-    border-radius: 0; /* Kotak tajam */
-    box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
-    transition: all 0.4s;
-    position: relative;
-    overflow: hidden;
-    animation: borderFlicker 4s infinite alternate; /* Animasi berkedip */
+    background: #1a1f29; /* Background kartu lebih terang dari body */
+    border: 1px solid var(--primary-blue);
+    padding: 35px 25px;
+    border-radius: 12px; /* Sudut tumpul */
+    box-shadow: 0 0 5px rgba(0, 136, 255, 0.4);
+    transition: all 0.4s ease-in-out; 
+    overflow: visible; /* Untuk efek glow keluar */
 }
 
-@keyframes borderFlicker {
-    0%, 100% { border-color: var(--primary-red); box-shadow: 0 0 5px var(--primary-red); }
-    50% { border-color: #550000; box-shadow: none; }
+.card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary-blue), var(--primary-red));
+    z-index: -1;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.4s;
+    filter: blur(8px);
+}
+
+.card:hover::before {
+    opacity: 0.5;
 }
 
 .card:hover {
-    background: linear-gradient(to bottom, #200000, #100000);
-    transform: translateY(-10px) scale(1.05); 
-    box-shadow: 0 15px 40px rgba(255, 0, 0, 1);
+    background: #252b36;
+    transform: translateY(-8px) scale(1.02); /* Lebih halus */
+    box-shadow: 0 10px 30px rgba(0, 136, 255, 0.5);
     border-color: white;
-    animation: none; /* Hapus flicker saat di-hover */
 }
 
 .card i {
-    font-size: 4rem; 
-    color: var(--primary-red); 
-    margin-bottom: 20px;
-    text-shadow: var(--accent-glow);
+    font-size: 3.5rem;
+    color: var(--primary-blue); /* Ikon biru */
+    text-shadow: var(--accent-glow-blue);
 }
-
-.card h3 {
-    font-family: var(--title-font);
-    font-size: 2rem; 
-}
-
 
 /* Goals Section: Parallax Effect & List Item Premium */
 .parallax-bg {
-    /* PATH GAMBAR LOGO METASLAYERS MERAH (digunakan sebagai background) */
-    background-image: url('../img/MetaSlayers_Logo.jpeg'); 
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    /* Style sama */
+    /* ... */
 }
 
 .parallax-bg::before {
-    background: rgba(0, 0, 0, 0.95); /* Overlay sangat gelap */
+    background: rgba(0, 0, 0, 0.85); /* Dark overlay kembali ke hitam */
 }
 
 .goal-list li {
-    background: rgba(255, 0, 0, 0.1); 
-    border-left: 6px solid var(--primary-red); 
-    border-radius: 0; /* Kotak tajam */
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    background: rgba(0, 136, 255, 0.1); /* Background item list biru muda */
+    border-left: 6px solid var(--primary-blue); /* Border biru */
+    padding: 15px 25px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 136, 255, 0.3);
 }
 
 .goal-list li:hover {
-    background: rgba(255, 0, 0, 0.25);
+    background: rgba(0, 136, 255, 0.25);
     transform: translateX(10px) scale(1.01); 
-    box-shadow: 0 0 25px var(--primary-red);
+    box-shadow: 0 0 20px var(--primary-blue);
 }
 
 .goal-list li i {
-    color: var(--primary-red); 
-    font-size: 1.5rem;
+    color: var(--primary-blue); /* Ikon biru */
 }
 
 /* Playstyle Section */
 .play-card {
-    border: 4px solid var(--primary-red); 
-    border-radius: 0;
-    box-shadow: var(--accent-glow);
-    background: #1a0000;
+    padding: 30px;
+    border: 2px dashed var(--primary-red); /* Tetap merah untuk tema tempur */
+    border-radius: 15px;
+    box-shadow: var(--accent-glow-red);
+    background: #150a0a;
 }
 
 .play-card:hover {
-    border-color: white;
-    background: #2a0000;
+    background: #251010;
+    border-style: solid;
+    transform: scale(1.02);
 }
 
 .play-card h3 {
-    font-family: var(--title-font);
     color: var(--primary-red);
-    text-shadow: var(--accent-glow);
+    text-shadow: var(--accent-glow-red);
 }
 
 .slogan-text {
-    font-family: var(--title-font);
-    font-size: 2.5rem; 
+    font-size: 2rem;
     color: var(--primary-red);
-    border: 4px solid var(--primary-red);
-    border-radius: 0;
-    background: rgba(0, 0, 0, 0.7);
+    text-shadow: var(--accent-glow-red);
+    border: 3px solid var(--primary-red);
+    border-radius: 50px; /* Tulled */
+    background: var(--darker-bg);
     animation: sloganPulse 2s infinite alternate;
 }
 
 /* Rules & Structure Section */
+.rules-structure-grid {
+    gap: 30px;
+}
+
 .structure-box, .rules-box {
-    background: linear-gradient(to bottom right, #1a0000, #050000); 
-    border-radius: 0;
-    border: 3px solid var(--primary-red);
-    box-shadow: inset 0 0 15px rgba(255, 0, 0, 0.7), 0 0 15px rgba(255, 0, 0, 0.3); 
+    background: linear-gradient(to bottom right, #1a1f29, #0d1117); /* Gradient biru gelap */
+    padding: 35px;
+    border-radius: 15px;
+    border: 2px solid var(--primary-blue);
+    box-shadow: inset 0 0 15px rgba(0, 136, 255, 0.4), 0 0 15px rgba(0, 136, 255, 0.2); 
 }
 
 .structure-box h3, .rules-box h3 {
-    font-family: var(--title-font);
-    color: var(--primary-red);
-    border-bottom: 3px solid var(--primary-red);
+    color: var(--primary-blue);
+    font-size: 1.6rem;
+    border-bottom: 2px solid var(--primary-blue);
 }
 
 .structure-box i {
-    color: var(--primary-red); 
+    color: var(--primary-red); /* Ikon tetap merah agar kontras */
 }
 
 .rules-box ol li:first-child {
-    color: var(--primary-red);
-    text-shadow: 0 0 8px var(--primary-red);
+    color: var(--primary-red); /* Aturan utama tetap merah */
+    text-shadow: 0 0 5px var(--primary-red);
 }
 
 .server-status {
-    font-family: var(--title-font);
-    color: var(--primary-red); 
-    text-shadow: var(--accent-glow);
-    background: rgba(255, 0, 0, 0.15);
-    border: 2px solid var(--primary-red);
-    border-radius: 0;
-    padding: 15px 30px;
+    color: var(--primary-red); /* Status server merah */
+    text-shadow: var(--accent-glow-red);
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid var(--primary-red);
+    border-radius: 50px; /* Tulled */
 }
 
 /* Footer */
 .main-footer {
     background-color: var(--darker-bg);
-    border-top: 3px solid var(--primary-red);
+    border-top: 3px solid var(--primary-blue); /* Border biru */
 }
 
 .main-footer .discord-link {
-    color: var(--primary-red); 
+    color: var(--primary-blue); /* Link discord biru */
 }
 
 .main-footer .discord-link:hover {
-    color: white;
-    text-shadow: var(--accent-glow);
+    color: #fff;
+    text-shadow: var(--accent-glow-blue);
 }
 
-/* --- Responsiveness --- */
+/* --- Responsiveness (Tambahan untuk Header Baru) --- */
+@media (max-width: 1200px) {
+    .header-container {
+        padding: 0 20px;
+    }
+}
 @media (max-width: 900px) {
-    /* Style responsif yang sudah ada tetap berlaku */
-    .hero-section h1 { font-size: 4rem; letter-spacing: 5px; }
-    .subtitle { font-size: 1.4rem; letter-spacing: 4px; }
-    .card h3 { font-size: 1.5rem; }
-    .section-title { font-size: 2.5rem; }
+    .header-container {
+        flex-direction: column;
+    }
+    .main-header nav {
+        margin: 15px 0;
+        order: 3;
+    }
+    .search-mockup {
+        display: none; /* Sembunyikan search bar di mobile */
+    }
+    /* Style lainnya di media query sebelumnya tetap berlaku */
 }
