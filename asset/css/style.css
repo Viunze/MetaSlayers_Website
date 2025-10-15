@@ -256,14 +256,18 @@ body::before {
     display: none; /* Logo di dalam hero content dihilangkan karena ada di header */
 }
 
+/* --- PERBAIKAN JUDUL HERO SECTION DI SINI --- */
 .hero-section h1 {
     font-family: var(--title-font);
-    font-size: 6rem; /* Dikecilkan */
+    font-size: 5.5rem; /* Ukuran font sedikit dikecilkan lagi */
+    line-height: 1; /* Menghilangkan spasi antar baris */
+    letter-spacing: 4px; /* Letter spacing sedikit dikurangi */
     color: var(--primary-red);
     margin-bottom: 15px;
     text-shadow: var(--accent-glow);
     animation: glitch-anim 1.5s infinite alternate ease-in-out; 
-    letter-spacing: 6px; /* Dikecilkan */
+    word-break: break-word; /* Memastikan teks bisa pindah baris jika terlalu panjang */
+    overflow-wrap: break-word; /* Alternatif untuk word-break */
 }
 
 @keyframes glitch-anim {
@@ -689,7 +693,11 @@ body::before {
     .logo {
         font-size: 2rem;
     }
-    .hero-section h1 { font-size: 3.5rem; letter-spacing: 4px; }
+    /* --- Perbaikan Responsive untuk Judul Hero Section --- */
+    .hero-section h1 { 
+        font-size: 3.5rem; /* Dikecilkan lebih jauh di mobile */
+        letter-spacing: 3px; 
+    }
     .subtitle { font-size: 1.2rem; letter-spacing: 3px; }
     
     .section-title { font-size: 2.2rem; }
