@@ -3,107 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabung MetaSlayers | Cara Join</title>
-    <link rel="stylesheet" href="assets/css/fonts.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Gabung MetaSlayers | Pendaftaran Crew</title>
+    <link rel="stylesheet" href="asset/css/fonts.css">
+    <link rel="stylesheet" href="asset/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        .join-content {
-            text-align: center;
-            padding: 100px 20px;
-            min-height: 80vh;
-        }
-
-        .discord-box {
-            background: var(--dark-bg);
-            border: 3px solid var(--primary-red);
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-            animation: pulse-red 1.5s infinite alternate; /* Animasi khusus */
-        }
-
-        .discord-box h2 {
-            font-family: 'Russo One', sans-serif;
-            color: var(--text-color);
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-        }
-
-        .discord-box p {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-        }
-
-        .discord-link-button {
-            display: inline-block;
-            background-color: var(--discord-purple); /* Menggunakan variabel dari style.css */
-            color: #ffffff;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: 700;
-            border-radius: 8px;
-            transition: all 0.3s;
-            box-shadow: 0 0 10px var(--discord-purple);
-        }
-
-        .discord-link-button:hover {
-            background-color: #5b6fb8;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px var(--discord-purple);
-        }
-
-        @keyframes pulse-red {
-            0% { transform: scale(1); box-shadow: 0 0 10px var(--primary-red); }
-            100% { transform: scale(1.02); box-shadow: 0 0 25px var(--primary-red); }
-        }
-    </style>
-</head>
-<body>
-
+    </head>
+<body class="join-page">
     <header class="main-header">
-        <div class="logo">
-            <span class="meta-text">META</span><span class="slayers-text">SLAYERS</span>
+        <div class="header-container">
+            <div class="logo">
+                <span class="meta-text">META</span><span class="slayers-text">SLAYERS</span>
+            </div>
+            <nav>
+                <a href="index.html">BERANDA</a>
+                <a href="index.html#rules">ATURAN</a>
+                <a href="https://discord.gg/7msEADSXB" target="_blank" class="cta-button">DISCORD <i class="fab fa-discord"></i></a>
+            </nav>
         </div>
-        <nav>
-            <a href="index.html#about">TENTANG</a>
-            <a href="index.html#goals">TUJUAN</a>
-            <a href="index.html#playstyle">GAYA MAIN</a>
-            <a href="index.html#rules">ATURAN</a>
-            <a href="index.html" class="cta-button">KEMBALI</a>
-        </nav>
     </header>
 
-    <div class="join-content">
-        <h1 class="section-title">LANGKAH UNTUK BERGABUNG</h1>
-        <p>Jadilah bagian dari crew MetaSlayers! Ikuti langkah-langkah di bawah ini untuk memulai perjalanan Anda:</p>
+    <section id="join-form" class="content-section">
+        <div class="container">
+            <h2 class="section-title">DAFTAR UNTUK GABUNG CREW</h2>
+            <div class="form-container">
+                <p class="description-join">
+                    Lengkapi data di bawah untuk melakukan pendaftaran. Wajib gabung Discord agar permintaan Anda diproses!
+                </p>
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="roblox_name"><i class="fas fa-user"></i> Nama Roblox Anda:</label>
+                        <input type="text" id="roblox_name" name="roblox_name" placeholder="Contoh: NamaTheMetaSlayers" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="level"><i class="fas fa-level-up-alt"></i> Level/Bounty:</label>
+                        <input type="text" id="level" name="level" placeholder="Contoh: Max Level / 5M Bounty" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="discord_id"><i class="fab fa-discord"></i> ID Discord Anda:</label>
+                        <input type="text" id="discord_id" name="discord_id" placeholder="Contoh: user1234" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="alasan"><i class="fas fa-question-circle"></i> Alasan Gabung:</label>
+                        <textarea id="alasan" name="alasan" rows="4" placeholder="Kenapa kamu ingin menjadi MetaSlayers?" required></textarea>
+                    </div>
+                    
+                    <p class="warning-text">
+                        <i class="fas fa-exclamation-triangle"></i> Pastikan Anda sudah membaca semua <a href="index.html#rules">ATURAN CREW</a> sebelum submit.
+                    </p>
 
-        <div class="discord-box">
-            <h2><i class="fab fa-discord"></i> MARKAS UTAMA</h2>
-            <p>Semua pendaftaran dan koordinasi crew dilakukan melalui server Discord kami. Klik tombol di bawah ini dan ikuti instruksi *#verification*.</p>
-            <a href="https://discord.gg/7msEADSXB" target="_blank" class="discord-link-button">
-                MASUK SERVER DISCORD
-            </a>
-            <p style="margin-top: 20px; font-style: italic;">Link DC: https://discord.gg/7msEADSXB</p>
+                    <button type="submit" class="submit-button">SUBMIT PENDAFTARAN <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
         </div>
-
-        <div class="rules-box" style="max-width: 600px; margin: 40px auto; border-color: #fff; background: rgba(255, 255, 255, 0.05);">
-            <h3>PENTING: PERSIAPAN</h3>
-            <ol>
-                <li>**Siapkan Nama:** Ubah nama Roblox kalian menjadi `NamaTheMetaSlayers` sebelum join.</li>
-                <li>**Baca Aturan:** Pahami semua Rule di channel Discord dan di halaman ini.</li>
-                <li>**Tingkatkan Skill:** Kami mencari pemain yang berniat grinding dan PvP.</li>
-            </ol>
-        </div>
-    </div>
+    </section>
 
     <footer class="main-footer">
         <p>&copy; 2025 MetaSlayers Crew. All rights reserved. | Blox Fruits Community.</p>
         <a href="https://discord.gg/7msEADSXB" target="_blank" class="discord-link"><i class="fab fa-discord"></i> GABUNG DISCORD KAMI</a>
     </footer>
 
+    <script src="asset/js/script.js"></script>
 </body>
 </html>
